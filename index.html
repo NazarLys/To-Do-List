@@ -1,0 +1,69 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        ul { list-style-type: none; padding: 0; }
+        li { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: #f4f4f4; 
+            padding: 10px; 
+            margin: 5px auto; 
+            width: 300px; 
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        li.completed { text-decoration: line-through; color: gray; }
+        button { 
+            background: red; 
+            color: white; 
+            border: none; 
+            padding: 5px 10px; 
+            cursor: pointer; 
+            border-radius: 3px;
+        }
+        button:hover { background: darkred; }
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <input type="text" id="task" placeholder="Enter a task">
+    <button onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        function addTask() {
+            let taskInput = document.getElementById("task");
+            let taskText = taskInput.value.trim();
+            
+            if (taskText !== "") {
+                let li = document.createElement("li");
+                li.innerText = taskText;
+                
+                // Toggle completion when clicking on task
+                li.addEventListener("click", function() {
+                    this.classList.toggle("completed");
+                });
+
+                // Create delete button
+                let deleteBtn = document.createElement("button");
+                deleteBtn.innerText = "X";
+                deleteBtn.onclick = function() {
+                    this.parentElement.remove();
+                };
+
+                li.appendChild(deleteBtn);
+                document.getElementById("taskList").appendChild(li);
+                taskInput.value = "";
+            } else {
+                alert("Please enter a task!");
+            }
+        }
+    </script>
+</body>
+</html>
