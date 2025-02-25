@@ -35,28 +35,21 @@
     <input type="text" id="task" placeholder="Enter a task">
     <button onclick="addTask()">Add Task</button>
     <ul id="taskList"></ul>
-
     <script>
         function addTask() {
             let taskInput = document.getElementById("task");
             let taskText = taskInput.value.trim();
-            
             if (taskText !== "") {
                 let li = document.createElement("li");
                 li.innerText = taskText;
-                
-                // Toggle completion when clicking on task
                 li.addEventListener("click", function() {
                     this.classList.toggle("completed");
                 });
-
-                // Create delete button
                 let deleteBtn = document.createElement("button");
                 deleteBtn.innerText = "X";
                 deleteBtn.onclick = function() {
                     this.parentElement.remove();
                 };
-
                 li.appendChild(deleteBtn);
                 document.getElementById("taskList").appendChild(li);
                 taskInput.value = "";
